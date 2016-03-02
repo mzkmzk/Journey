@@ -13,5 +13,7 @@ class User_Entity extends Base_Entity{
         "User" => "用户"
     ];
 
+
+
     
 }
