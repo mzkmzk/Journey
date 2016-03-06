@@ -1,0 +1,15 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+
+use DummyRootNamespaceHttp\Requests;
+use DummyRootNamespaceHttp\Controllers\Base_Controller;
+
+class DummyClass extends Base_Controller
+{
+     public function __construct(){
+        $this->model =new Dummy_Model();
+     }
+}

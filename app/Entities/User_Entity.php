@@ -13,7 +13,13 @@ class User_Entity extends Base_Entity{
         "User" => "用户"
     ];
 
+    private $attribute = array();
 
+    public function get_attribute(){
+        $this->attribute['user_name'] = parent::set_attribute("用户名","string");
+        $this->attribute['password'] = parent::set_attribute("密码","string");
+        return array_merge(parent::get_base_attribute(),$this->attribute);
+    }
 
     
 }
