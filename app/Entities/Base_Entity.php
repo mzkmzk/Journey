@@ -23,7 +23,7 @@ class Base_Entity{
 
     /**
      * @param $front 前端显示字段名
-     * @param $type 字段类型 "id" , "string" , "date_time" "picture"
+     * @param $type 字段类型 "id" , "string" , "date_time" "url","int"
      * @param $option 选项
      * @param $length 字段长度
      * @return array

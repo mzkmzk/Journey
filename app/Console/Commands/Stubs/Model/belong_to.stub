@@ -1,0 +1,3 @@
+    public function dummy_belong_to(){
+        return $this->belongsTo('App\Dump_Belong_To_Model','dump_belong_to_entity_id','id');
+    }

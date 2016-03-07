@@ -2,20 +2,15 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Auth\Console\K_Command;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\ArgvInput;
 
-class K_Make_Commond extends GeneratorCommand
+class K_Make_Controller extends GeneratorCommand
 {
 
-    private $make_entities = ["User"];
-
-    public function __construct(Filesystem $files){
-        parent::__construct($files);
-        $this->addArgument("name",null,"","User_Controller");
-    }
     /**
      * The name and signature of the console command.
      *
@@ -28,14 +23,14 @@ class K_Make_Commond extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:K';
+    protected $name = 'make:k_controller';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new K_Series class';
+    protected $description = 'Create a new K_Controller model class';
 
     /**
      * The type of class being generated.
@@ -51,7 +46,7 @@ class K_Make_Commond extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/stubs/controller.stub';
+        return __DIR__.'/Stubs/Controller.stub';
     }
 
     /**
@@ -89,13 +84,27 @@ class K_Make_Commond extends GeneratorCommand
     {
         $namespace = $this->getNamespace($name);
         $default_replace = str_replace("use $namespace\Controller;\n", '', parent::buildClass($name));
-        return str_replace("Dummy_Model", "User_Model", $default_replace);
+        return str_replace("Now_Entity", $this->argument("name"), $default_replace);
     }
 
-    protected function getArguments()
+    public function fire()
     {
-        return [
-            //['name', InputArgument::REQUIRED, 'The name of the class'],
-        ];
+        $name = $this->parseName($this->getNameInput()."_Controller");
+
+        $path = $this->getPath($name);
+
+        if ($this->alreadyExists($this->getNameInput())) {
+            $this->error($this->type.' already exists!');
+
+            return false;
+        }
+
+        $this->makeDirectory($path);
+
+        $this->files->put($path, $this->buildClass($name));
+
+        $this->info($this->type.' created successfully.');
     }
+
+
 }

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use DummyRootNamespaceHttp\Requests;
 use DummyRootNamespaceHttp\Controllers\Base_Controller;
 
-class DummyClass extends Base_Controller
+class Now_Entity_Controller extends Base_Controller
 {
      public function __construct(){
-        $this->model =new Dummy_Model();
+        $this->model =new Now_Entity_Model();
      }
 }
