@@ -9,16 +9,13 @@ namespace App\Entities;
 
 class Base_Entity{
 
-    private $base_attribute = array();
-
-    public $attribute = array();
-
-    public function get_base_attribute(){
-        $this->base_attribute['id'] = $this->set_attribute("序号","id");
-        $this->base_attribute['created_at'] = $this->set_attribute("创建时间","date_time");
-        $this->base_attribute['updated_at'] = $this->set_attribute("修改时间","date_time");
-        $this->base_attribute['deleted_at'] = $this->set_attribute("删除时间","date_time");
-        return $this->base_attribute ;
+    public static function get_attribute(){
+        $attribute = array();
+        $attribute['id'] = self::set_attribute("序号","id");
+        $attribute['created_at'] = self::set_attribute("创建时间","date_time");
+        $attribute['updated_at'] = self::set_attribute("修改时间","date_time");
+        $attribute['deleted_at'] = self::set_attribute("删除时间","date_time");
+        return $attribute ;
     }
 
     /**

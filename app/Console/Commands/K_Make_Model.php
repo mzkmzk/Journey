@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Filesystem\Filesystem;
 
 
+
 class K_Make_Model extends GeneratorCommand
 {
 
@@ -44,9 +45,21 @@ class K_Make_Model extends GeneratorCommand
      */
     public function fire()
     {
-        $this->addArgument("name",null,"","User_Model");
+        $name = $this->parseName($this->getNameInput()."_Model");
 
-        return parent::fire();
+        $path = $this->getPath($name);
+
+        if ($this->alreadyExists($this->getNameInput())) {
+            $this->error($this->type.' already exists!');
+
+            return false;
+        }
+
+        $this->makeDirectory($path);
+
+        $this->files->put($path, $this->buildClass($name));
+
+        $this->info($this->type.' created successfully.');
     }
 
     /**
@@ -85,25 +98,49 @@ class K_Make_Model extends GeneratorCommand
     protected function buildClass($name)
     {
         $build_class = parent::buildClass($name);
-        $build_class = str_replace("Dummy_Table", 'User', $build_class);
+        $build_class = str_replace("Dummy_Table", $this->argument("name"), $build_class);
         $build_class = str_replace("dummy_belong_to",$this->build_belong_to(),$build_class);
         $build_class = str_replace("dummy_has_many",$this->build_has_many(),$build_class);
         return $build_class;
     }
 
-    protected function getArguments()
-    {
-        return [
-            //['name', InputArgument::REQUIRED, 'The name of the class'],
-        ];
-    }
-
     protected function build_belong_to(){
-        return $this->files->get(__DIR__.'/Stubs/Model/Belong_To.stub');
+
+        $belong_to_string = "";
+        $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
+        if(isset($entity::$belong_to)){
+            foreach ($entity::$belong_to as $key => $value){
+                $belong_to_string .=
+                    str_replace
+                    (
+                        "dummy_belong_to_entity"
+                        ,strtolower($value)
+                        ,str_replace("Dump_Belong_To_Entity",$value,$this->files->get(__DIR__.'/Stubs/Model/Has_Many.stub'))
+                    );
+            }
+            return $belong_to_string;
+        }else{
+            return "";
+        }
     }
 
     protected function build_has_many(){
-        return $this->files->get(__DIR__.'/Stubs/Model/Has_Many.stub');
+        $has_many_string = "";
+        $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
+        if(isset($entity::$has_many)){
+            foreach ($entity::$has_many as $key => $value){
+                $has_many_string .=
+                    str_replace
+                    (
+                        "dummy_has_many_entity"
+                        ,strtolower($value)
+                        ,str_replace("Dump_Has_Many_Entity",ucwords($value),$this->files->get(__DIR__.'/Stubs/Model/Has_Many.stub'))
+                    );
+            }
+            return $has_many_string;
+        }else{
+            return "";
+        }
     }
 
 }

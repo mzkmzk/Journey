@@ -9,19 +9,18 @@ namespace App\Entities;
  */
 class User_Entity extends Base_Entity{
 
-    public $entity = [
+    public static $entity = [
         "User" => "用户"
     ];
 
-    private $attribute = array();
+    public static $has_many = ['activity'];
 
-    public $has_many = ['activity'];
-
-    public function get_attribute(){
-        $this->attribute['wechat_id'] = parent::set_attribute("微信ID","string");
-        $this->attribute['login_sum'] = parent::set_attribute("登陆次数","int");
-        $this->attribute['visit_password'] = parent::set_attribute("访问密码","string");
-        return array_merge(parent::get_base_attribute(),$this->attribute);
+    public static function get_attribute(){
+        $attribute = array();
+        $attribute['wechat_id'] = parent::set_attribute("微信ID","string");
+        $attribute['login_sum'] = parent::set_attribute("登陆次数","int");
+        $attribute['visit_password'] = parent::set_attribute("访问密码","string");
+        return array_merge(parent::get_attribute(),$attribute);
     }
 
     

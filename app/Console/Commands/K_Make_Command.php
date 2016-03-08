@@ -23,7 +23,8 @@ class K_Make_Command extends Command
     public function fire()
     {
         foreach(self::$entities as $key=>$value){
-            $this->call('make:k_controller',['name' => $value]);
+            //$this->call('make:k_controller',['name' => $value]);
+            $this->call('make:k_model',['name' => $value]);
         }
 
 
