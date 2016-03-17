@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
@@ -9,7 +10,7 @@ use Illuminate\Filesystem\Filesystem;
 
 
 
-class K_Make_Model extends GeneratorCommand
+class K_Make_Migration extends GeneratorCommand
 {
 
     /**
@@ -17,21 +18,21 @@ class K_Make_Model extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'make:k_model';
+    protected $name = 'make:k_migration';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new K_Eloquent model class';
+    protected $description = 'Create a new K_Migration  class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Model';
+    protected $type = 'Migration';
 
     /**
      * Execute the console command.
@@ -40,13 +41,15 @@ class K_Make_Model extends GeneratorCommand
      */
     public function fire()
     {
-        $name = $this->parseName($this->getNameInput()."_Model");
+        $date = date("Y_m_d");
+        $random = random_int(100000,999999);
+
+        $name = $this->parseName($date."_" .$random ."_Create_". $this->getNameInput());
 
         $path = $this->getPath($name);
 
         if ($this->alreadyExists($this->getNameInput())) {
             $this->error($this->type.' already exists!');
-
             return false;
         }
 
@@ -64,7 +67,7 @@ class K_Make_Model extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__.'/Stubs/Model/Model.stub';
+        return __DIR__.'/Stubs/Migration/Create.stub';
     }
 
     /**
@@ -93,49 +96,31 @@ class K_Make_Model extends GeneratorCommand
     protected function buildClass($name)
     {
         $build_class = parent::buildClass($name);
+        $build_class = str_replace("Dummy_Class", "Create_".$this->argument("name"), $build_class);
         $build_class = str_replace("Dummy_Table", $this->argument("name"), $build_class);
-        $build_class = str_replace("dummy_belong_to",$this->build_belong_to(),$build_class);
-        $build_class = str_replace("dummy_has_many",$this->build_has_many(),$build_class);
+        $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
+        $build_class = str_replace("dummy_attribute",$this->build_attribute($entity),$build_class);
         return $build_class;
     }
 
-    protected function build_belong_to(){
-
-        $belong_to_string = "";
+    protected function build_attribute(){
+        $attribute_string = "";
         $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
-        if(isset($entity::$belong_to)){
-            foreach ($entity::$belong_to as $key => $value){
-                $belong_to_string .=
-                    str_replace
-                    (
-                        "dummy_belong_to_entity"
-                        ,strtolower($value)
-                        ,str_replace("Dump_Belong_To_Entity",$value,$this->files->get(__DIR__.'/Stubs/Model/Has_Many.stub'))
-                    );
+        foreach ($entity::get_attribute() as $key => $attribute){
+            switch ($attribute['type']){
+                case "id" :
+                    $attribute_string .= "\$table->unsignedInteger('" .$key ."');\n\n";
+                    break;
+                case "string" :
+                    $attribute_string .= "\$table->string('".$key."','" .$attribute['length'] ."');\n\n";
+                    break;
+                case "date_time" :
+                    $attribute_string .= "\$table->dateTime('" .$key ."');\n\n";
+                    break;
             }
-            return $belong_to_string;
-        }else{
-            return "";
         }
-    }
+        return $attribute_string;
 
-    protected function build_has_many(){
-        $has_many_string = "";
-        $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
-        if(isset($entity::$has_many)){
-            foreach ($entity::$has_many as $key => $value){
-                $has_many_string .=
-                    str_replace
-                    (
-                        "dummy_has_many_entity"
-                        ,strtolower($value)
-                        ,str_replace("Dump_Has_Many_Entity",ucwords($value),$this->files->get(__DIR__.'/Stubs/Model/Has_Many.stub'))
-                    );
-            }
-            return $has_many_string;
-        }else{
-            return "";
-        }
     }
 
 }

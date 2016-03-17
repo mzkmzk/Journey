@@ -24,7 +24,8 @@ class K_Make_Command extends Command
     {
         foreach(self::$entities as $key=>$value){
             //$this->call('make:k_controller',['name' => $value]);
-            $this->call('make:k_model',['name' => $value]);
+            //$this->call('make:k_model',['name' => $value]);
+            $this->call('make:k_migration',['name' => $value]);
         }
 
 

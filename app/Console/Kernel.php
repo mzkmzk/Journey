@@ -17,6 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\K_Make_Command::class,
         Commands\K_Make_Controller::class,
         Commands\K_Make_Model::class,
+        Commands\K_Make_Migration::class,
     ];
 
     /**
