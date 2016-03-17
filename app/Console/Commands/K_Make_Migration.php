@@ -44,10 +44,11 @@ class K_Make_Migration extends GeneratorCommand
         $date = date("Y_m_d");
         $random = random_int(100000,999999);
 
-        $name = $this->parseName($date."_" .$random ."_Create_". $this->getNameInput());
+        $raw_name =$date."_" .$random ."_Create_". $this->getNameInput();
+        $name = $this->parseName($raw_name);
 
-        $path = $this->getPath($name);
-
+        $path =  $this->laravel->basePath()."/database/migrations/".$raw_name.".php";
+        error_log($path);
         if ($this->alreadyExists($this->getNameInput())) {
             $this->error($this->type.' already exists!');
             return false;

@@ -75,7 +75,7 @@ class K_Make_Model extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace;
+        return $rootNamespace."\\Models";
     }
 
     /**

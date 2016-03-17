@@ -11,19 +11,19 @@ class Create_Activity extends Migration
         Schema::create('Activity', function (Blueprint $table) {
             $table->unsignedInteger('id');
 
-            $table->dateTime('created_at');
+$table->dateTime('created_at');
 
-            $table->dateTime('updated_at');
+$table->dateTime('updated_at');
 
-            $table->dateTime('deleted_at');
+$table->dateTime('deleted_at');
 
-            $table->dateTime('activity_at');
+$table->dateTime('activity_at');
 
-            $table->string('text','20000');
+$table->string('text','20000');
 
-            $table->string('place','255');
+$table->string('place','255');
 
-            $table->unsignedInteger('user_id');
+$table->unsignedInteger('user_id');
 
 
         });
