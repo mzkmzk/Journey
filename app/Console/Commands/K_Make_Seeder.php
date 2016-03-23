@@ -43,25 +43,32 @@ class K_Make_Seeder extends GeneratorCommand
     {
         $name = $this->parseName($this->getNameInput());
 
-        $path =  $this->laravel->basePath()."/database/seeds/DatabaSeeder.php";
+        $path =  $this->laravel->basePath()."/database/seeds/DatabaseSeeder.php";
 
         if (!$this->files->exists($path)) {
             $this->makeDirectory($path);
             $this->files->put($path, $this->buildClass($name));
         }
 
-        $this->files->put($path, $this->buildClass($name));
+        $this->files->put($path, $this->append_build_class());
         $this->info($this->type.' created successfully.');
     }
 
-
-
-    protected function buildClass($name)
-    {
+    protected function buildClass($name){
         $stub = $this->files->get(__DIR__.'/Stubs/Seeder/Seeder.stub');
+        $stub = str_replace("//",$this->create_seeder(),$stub);
+        return $stub;
+    }
 
-        //如何插进去
-        return $this->files->get(__DIR__.'/Stubs/Seeder/Seeder.stub');
+    protected function append_build_class()
+    {
+        $stub = $this->files->get( $this->laravel->basePath()."/database/seeds/DatabaseSeeder.php");
+        $stub = str_replace("//",$this->create_seeder(),$stub);
+        return $stub;
+    }
+
+    protected function create_seeder(){
+        return "factory(App\\Models\\".ucwords($this->getNameInput())."_Model::class, 21)->create();\n\n//";
     }
 
     /**
