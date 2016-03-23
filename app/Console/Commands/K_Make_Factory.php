@@ -111,7 +111,7 @@ class K_Make_Factory extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace;
+        return "App\\Models";
     }
 
     /**

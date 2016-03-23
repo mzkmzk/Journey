@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(App\User_Model::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\User_Model::class, function (Faker\Generator $faker) {
     return [
         'id' => $faker->randomElement(get_all_id(new id_Model())),
 'created_at' => $faker->dateTime(),
@@ -14,7 +14,7 @@ $factory->define(App\User_Model::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(App\Activity_Model::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Activity_Model::class, function (Faker\Generator $faker) {
     return [
         'id' => $faker->randomElement(get_all_id(new id_Model())),
 'created_at' => $faker->dateTime(),
@@ -29,7 +29,7 @@ $factory->define(App\Activity_Model::class, function (Faker\Generator $faker) {
 });
 
 
-$factory->define(App\Media_Model::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Media_Model::class, function (Faker\Generator $faker) {
     return [
         'id' => $faker->randomElement(get_all_id(new id_Model())),
 'created_at' => $faker->dateTime(),
