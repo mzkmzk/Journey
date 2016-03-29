@@ -97,7 +97,7 @@ class K_Make_Migration extends GeneratorCommand
     protected function buildClass($name)
     {
         $build_class = parent::buildClass($name);
-        $build_class = str_replace("Dummy_Class", "Create_".$this->argument("name"), $build_class);
+        $build_class = str_replace("Dummy_Class", "Create".$this->argument("name"), $build_class);
         $build_class = str_replace("Dummy_Table", $this->argument("name"), $build_class);
         $entity = "App\\Entities\\" . $this->argument("name") . "_Entity";
         $build_class = str_replace("dummy_attribute",$this->build_attribute($entity),$build_class);
@@ -110,14 +110,27 @@ class K_Make_Migration extends GeneratorCommand
         foreach ($entity::get_attribute() as $key => $attribute){
             switch ($attribute['type']){
                 case "id" :
-                    $attribute_string .= "\$table->unsignedInteger('" .$key ."');\n\n";
+                    if ($key === "id") {
+                        $attribute_string .= "\$table->increments('" .$key ."');\n\n";
+                    } else {
+                        $attribute_string .= "\$table->unsignedInteger('" .$key ."');\n\n";
+                    }
                     break;
-                case "string" :
+                //case "string" || "url": 这样date_time也会变string后面基本都会变string
+                case "string":
                     $attribute_string .= "\$table->string('".$key."','" .$attribute['length'] ."');\n\n";
                     break;
                 case "date_time" :
                     $attribute_string .= "\$table->dateTime('" .$key ."');\n\n";
                     break;
+                case "int" :
+                    $attribute_string .= "\$table->integer('" .$key ."');\n\n";
+                    break;
+                case "url" :
+                    $attribute_string .= "\$table->string('".$key."','" .$attribute['length'] ."');\n\n";
+                    break;
+
+
             }
         }
         return $attribute_string;

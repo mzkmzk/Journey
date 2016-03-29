@@ -76,6 +76,7 @@ class K_Make_Factory extends GeneratorCommand
                     $attribute_factory_string .= "'$key' => \$faker->text(30),\n";
                     break;
                 case "date_time" :
+                    if($key !== "deleted_at")
                     $attribute_factory_string .= "'$key' => \$faker->dateTime(),\n";
                     break;
                 case "url" : //后续可添加video 多媒体
@@ -85,13 +86,10 @@ class K_Make_Factory extends GeneratorCommand
                     $attribute_factory_string .= "'$key' => \$faker->numberBetween(),\n";
                     break;
                 case "id" :
-                    if(strlen($key)>2){
+                    if($key !== "id"){
                         $relation_name = ucwords(substr($key,0,-3));
-                    } else {
-                        $relation_name = "id";
+                        $attribute_factory_string .= "'$key' => \$faker->randomElement(get_all_id(new \\App\\Models\\".$relation_name."_Model())),\n";
                     }
-
-                    $attribute_factory_string .= "'$key' => \$faker->randomElement(get_all_id(new ".$relation_name."_Model())),\n";
                     break;
             }
         }

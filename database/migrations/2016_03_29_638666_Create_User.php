@@ -3,13 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create_Media extends Migration
+class CreateUser extends Migration
 {
 
     public function up()
     {
-        Schema::create('Media', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+        Schema::create('User', function (Blueprint $table) {
+            $table->increments('id');
 
 $table->dateTime('created_at');
 
@@ -17,7 +17,11 @@ $table->dateTime('updated_at');
 
 $table->dateTime('deleted_at');
 
-$table->unsignedInteger('activity_id');
+$table->string('wechat_id','255');
+
+$table->integer('login_sum');
+
+$table->string('visit_password','255');
 
 
         });
@@ -25,6 +29,6 @@ $table->unsignedInteger('activity_id');
 
     public function down()
     {
-        Schema::drop('Media');
+        Schema::drop('User');
     }
 }

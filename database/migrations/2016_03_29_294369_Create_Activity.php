@@ -3,13 +3,13 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Create_Activity extends Migration
+class CreateActivity extends Migration
 {
 
     public function up()
     {
         Schema::create('Activity', function (Blueprint $table) {
-            $table->unsignedInteger('id');
+            $table->increments('id');
 
 $table->dateTime('created_at');
 

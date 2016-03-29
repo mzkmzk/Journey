@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Activity_Model extends Model
+class Activity_Model extends Base_Model
 {
     protected $table = 'Activity';
 
