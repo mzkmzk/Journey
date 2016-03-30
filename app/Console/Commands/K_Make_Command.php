@@ -28,11 +28,9 @@ class K_Make_Command extends Command
             $this->call('make:k_migration',['name' => $value]);
             $this->call('make:k_factory',['name' => $value]);
             $this->call('make:k_seeder',['name' => $value]);
-
-            $this->call("migrate");
-            $this->call("db:seed");
-
         }
+        $this->call("migrate");
+        $this->call("db:seed");
 
 
         $this->comment('Authentication scaffolding generated successfully!');

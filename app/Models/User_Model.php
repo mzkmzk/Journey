@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 class User_Model extends Base_Model
 {
     protected $table = 'User';
