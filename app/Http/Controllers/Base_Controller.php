@@ -39,7 +39,7 @@ class Base_Controller extends Controller{
     }
 
 
-    protected function insert(){
+    public function insert(){
 
         foreach($this->request->all() as $key => $value){
             if (array_key_exists($key,$this->entity->get_attribute()) ==true){
@@ -48,7 +48,7 @@ class Base_Controller extends Controller{
         }
         $result["result"] = $this->model->save();
 
-        return $result;
+        return $this->model;
     }
 
     public function update(){
