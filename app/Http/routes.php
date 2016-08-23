@@ -4,6 +4,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::any('/get_token','QiNiu_Controller@get_token');
+
+
 Route::group(['prefix' => 'v1/{Entity_Controller}'], function (){
     //
     Route::get('query',function($Entity_Controller,\Illuminate\Http\Request $request){
