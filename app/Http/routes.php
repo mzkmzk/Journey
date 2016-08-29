@@ -1,7 +1,9 @@
 <?php
 
 Route::get('/', function () {
-    return view('welcome');
+    $abc = [];
+	echo $abc['1234'];
+	//return view('welcome');
 });
 
 Route::group(['prefix' => 'v1/{Entity_Controller}'], function (){
