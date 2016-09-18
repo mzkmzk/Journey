@@ -1,9 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    $abc = [];
-	echo $abc['1234'];
-	//return view('welcome');
+	return view('welcome');
 });
 
 
