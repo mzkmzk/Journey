@@ -7,13 +7,17 @@ namespace App\Entities;
  * Date: 16/2/28
  * Time: 下午10:42
  */
-class User_Entity extends Base_Entity{
+
+use K_Laravel_Creator\Entities\Base_Entity;
+
+
+class Creator_User_Entity extends Base_Entity{
 
     public static $entity = [
         "User" => "用户"
     ];
 
-    public static $has_many = ['activity'];
+    public static $has_many = ['Creator_Activity'];
 
     public static function get_attribute(){
         $attribute = array();

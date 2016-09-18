@@ -7,7 +7,7 @@
  */
 namespace App\Entities;
 
-class Base_Entity{
+class Base_Entity11{
 
     public static function get_attribute(){
         $attribute = array();

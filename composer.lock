@@ -4,9 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd59a762a4e84ca518c14bec36a241bf",
-    "content-hash": "ea3e37519d4cc566a9ad1771685a805d",
+    "hash": "d343ff1946121103db32152ddb8a51ac",
+    "content-hash": "3771402747a1e1d7e51ae3207c77baaa",
     "packages": [
+        {
+            "name": "404_k/k_laravel_creator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mzkmzk/K_Laravel_Creator.git",
+                "reference": "655e456927c8423316ab059f9aa3463dac1b9de9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/mzkmzk/K_Laravel_Creator/655e456927c8423316ab059f9aa3463dac1b9de9.zip",
+                "reference": "655e456927c8423316ab059f9aa3463dac1b9de9",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.2.*",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "K_Laravel_Creator\\": "Src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mai ZhiKun",
+                    "email": "mz_kk@sina.com"
+                }
+            ],
+            "time": "2016-09-11 06:50:55"
+        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -3055,7 +3091,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "404_k/k_laravel_creator": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

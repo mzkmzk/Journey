@@ -156,6 +156,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        K_Laravel_Creator\Creator_Service_Provider::class,
+        K_Laravel_Creator\Creator_Route_Service_Provider::class,
+
     ],
 
     /*
