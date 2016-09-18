@@ -1,7 +1,0 @@
-$factory->define(Dump_Entity_Model::class, function (Faker\Generator $faker) {
-    return [
-        dummy_attribute
-    ];
-});
-
-
