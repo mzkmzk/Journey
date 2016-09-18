@@ -3,12 +3,12 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMedia extends Migration
+class CreatorMedia extends Migration
 {
 
     public function up()
     {
-        Schema::create('Media', function (Blueprint $table) {
+        Schema::create('Creator_Media', function (Blueprint $table) {
             $table->increments('id');
 
 $table->dateTime('created_at');
@@ -29,6 +29,6 @@ $table->integer('type');
 
     public function down()
     {
-        Schema::drop('Media');
+        Schema::drop('Creator_Media');
     }
 }

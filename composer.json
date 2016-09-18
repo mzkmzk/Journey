@@ -7,7 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "qiniu/php-sdk": "^7.0"
+        "qiniu/php-sdk": "^7.0",
+        "404_k/k_laravel_creator": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
