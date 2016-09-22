@@ -20,7 +20,8 @@ class Creator_Media_Entity extends Base_Entity{
         $attribute =array();
         $attribute['creator_activity_id'] = parent::set_attribute("活动ID","id");
         $attribute['url'] = parent::set_attribute("链接的url","url");
-        $attribute['type'] = parent::set_attribute("类型","int");
+        $attribute['type'] = parent::set_attribute("类型","int"); // 1图片
+        $attribute['qiniu_key'] = parent::set_attribute("七牛key",'string'); 
         return array_merge(parent::get_attribute(),$attribute);
     }
 

@@ -10,7 +10,7 @@ class Creator_User_Model extends Base_Model
     protected $table = 'Creator_User';
 
     public function creator_activity(){
-        return $this->hasMany('App\Models\Creator_Activity_Model','creator_activity_id','id');
+        return $this->hasMany('App\Creator_Activity_Model','creator_activity_id','id');
     }
 
 

@@ -10,7 +10,7 @@ class Creator_Activity_Model extends Base_Model
     protected $table = 'Creator_Activity';
 
     public function creator_media(){
-        return $this->hasMany('App\Models\Creator_Media_Model','creator_media_id','id');
+        return $this->hasMany('App\Creator_Media_Model','creator_media_id','id');
     }
 
 
