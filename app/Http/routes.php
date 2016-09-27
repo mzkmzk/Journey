@@ -15,3 +15,8 @@ Route::get('/php_info', function () {
 Route::any('/get_token','QiNiu_Controller@get_token');
 
 
+Route::group(['prefix' => 'v2/Activity_Controller'],function(){
+    Route::get('query','Activity_Controller@query');
+    Route::any('insert','Activity_Controller@insert');
+});
+

@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'illuminate.query' => [
             QueryListener::class,
         ],
+         \Illuminate\Database\Events\QueryExecuted::class => [
+             QueryListener::class,
+         ]
     ];
 
     /**

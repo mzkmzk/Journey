@@ -23,17 +23,25 @@ class QueryListener
      * @param  Events  $event
      * @return void
      */
-    public function handle($sql, $params)
+    //public function handle($sql, $params)
+    public function handle($event)
     {
         //error_log(env('APP_ENV', 'production'));
-            foreach ($params as $index => $param) {
-                if ($param instanceof DateTime) {
-                    $params[$index] = $param->format('Y-m-d H:i:s');
-                }
-            }
-            $sql = str_replace("?", "'%s'", $sql);
-            array_unshift($params, $sql);
-            error_log(call_user_func_array('sprintf', $params));
+            //foreach ($event->bindings as $index => $param) {
+            //    if ($param instanceof DateTime) {
+            //        $params[$index] = $param->format('Y-m-d H:i:s');
+            //    }
+            //}
+
+            //$sql = str_replace("?", "'%s'", $sql);
+            //array_unshift($params, $sql);
+
+             //error_log(call_user_func_array('sprintf', $params));
+             $sql = str_replace("?", "'%s'", $event->sql);
+
+            $log = vsprintf($sql, $event->bindings);
+
+            error_log($log);
 
     }
 }
