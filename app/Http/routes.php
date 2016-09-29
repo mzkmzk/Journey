@@ -20,3 +20,8 @@ Route::group(['prefix' => 'v2/Activity_Controller'],function(){
     Route::any('insert','Activity_Controller@insert');
 });
 
+Route::group(['prefix' => 'v2/User_Controller'],function(){
+    Route::get('sinaLogin','User_Controller@sinaLogin');
+});
+
+

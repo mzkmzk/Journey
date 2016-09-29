@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "qiniu/php-sdk": "^7.0",
-        "404_k/k_laravel_creator": "dev-master"
+        "404_k/k_laravel_creator": "dev-master",
+        "payment/httpclient": "^1.0",
+        "vinelab/http": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -25,7 +27,8 @@
             "App\\": "app/"
         },
         "files": [
-          "app/Utils/Utils.php"
+          "app/Utils/Utils.php",
+          "app/Utils/HttpClient.php"
         ]
     },
     "autoload-dev": {

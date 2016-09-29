@@ -39,7 +39,7 @@ return [
     |
     */
 
-
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -147,6 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Vinelab\Http\HttpServiceProvider::class,
 
         /*
          * Application Service Providers...
