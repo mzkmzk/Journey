@@ -10,7 +10,6 @@ class Creator_Media_Model extends Base_Model
     protected $table = 'Creator_Media';
 
 
-        //protected $fillable = ['qiniu_key'];
 
 
 }

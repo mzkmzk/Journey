@@ -16,12 +16,26 @@ class User_Controller extends Creator_User_Controller
      public function sinaLogin() {
         $code = $this->request->get('code');
         $access_token = $this->sinaAccessToken($code);
-
+        dump($access_token);
         //这里可以获取剩余过期时间,如果过少可以重新获取授权???每次登陆会产生不一样的access_token吗
-        $sina_uid = $access_token['uid'];
+        $sina_uid = $access_token->uid;
+        $sina_access_token = $access_token->access_token;
+
         $sina_user = $this->getSinaUser($sina_uid);
 
-
+        dump($sina_user);
+        if(count($sina_user) === 0 ) {
+           $sina_user = $this->model->create([
+                'sina_uid' => $sina_uid,
+                'sina_access_token' => $sina_access_token,
+           ]);
+        }else {
+            $sina_user = $sina_user[0];
+            $sina_user['sina_access_token'] = $sina_access_token;
+             $sina_user->save();
+        }
+        //不安全 需要改善
+        return redirect(env('URL')."?sina_access_token={$sina_access_token}&id={$sina_user['id']}");
 
      }
 
@@ -41,9 +55,9 @@ class User_Controller extends Creator_User_Controller
                 'code' => $code,
                 'redirect_uri' => env('URL')
             ]),
-        ]
+        ];
         $response = \HttpClient::post($request);
-        error_log($response->json());
+        error_log(json_encode( $response->json()));
         return $response->json();
      }
 

@@ -9,13 +9,13 @@ class Creator_Activity_Model extends Base_Model
 {
     protected $table = 'Creator_Activity';
 
-    public $appends = ['patient_name'];
-    //问题 模板生成时没有Models和id搞反了 
     public function creator_media(){
         return $this->hasMany('App\Models\Creator_Media_Model','creator_activity_id','id');
     }
+    //有问题,如果有多个属性的话
+     public $appends = ['patient_name'];
 
-        public function getPatientNameAttribute(){
+      public function getPatientNameAttribute(){
         if($this->creator_media !=null){
             return '11111' ;
         }else {
