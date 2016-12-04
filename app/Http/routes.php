@@ -24,4 +24,6 @@ Route::group(['prefix' => 'v2/User_Controller'],function(){
     Route::get('sinaLogin','User_Controller@sinaLogin');
 });
 
-
+Route::get('jsonp_demo',function() {
+    return Request::get('callback') . "({'name': 'i am k', 'email': 'mz_kk@sina.com'})";
+});

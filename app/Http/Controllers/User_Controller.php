@@ -14,6 +14,8 @@ class User_Controller extends Creator_User_Controller
      }
 
      public function sinaLogin() {
+
+        dump($this->request->get('url'));
         $code = $this->request->get('code');
         $access_token = $this->sinaAccessToken($code);
         dump($access_token);
@@ -23,7 +25,7 @@ class User_Controller extends Creator_User_Controller
 
         $sina_user = $this->getSinaUser($sina_uid);
 
-        dump($sina_user);
+        //dump($sina_user);
         if(count($sina_user) === 0 ) {
            $sina_user = $this->model->create([
                 'sina_uid' => $sina_uid,
